@@ -1,0 +1,56 @@
+<div class="main" ng-init="init()">
+    <form class="form" name="registerForm" ng-submit="submit(user)">
+        <div class="form-group alert alert-danger" ng-show="showError">
+            <label class="">{{errorMessage}}</label>
+            <span ng-click="showError = false" class="close">X</span>
+        </div>
+        <div class="form-group alert alert-success" ng-show="showSuccess">
+            <label class="">{{successMessage}}</label>
+            <span ng-click="showSuccess = false" class="close">X</span>
+        </div>
+        <div class="form-group">
+            <label class="control-label">Name</label>
+            <div class="input-group">
+                <input type="text" class="form-control" ng-model="user.name" />
+                <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+            </div>
+            <br/>
+            <label class="control-label">Email</label>
+            <div class="input-group">
+                <input type="text" class="form-control" ng-model="user.email" />
+                <span class="input-group-addon"><i class="glyphicon glyphicon-inbox"></i></span>
+            </div>
+            <br/>
+            <label class="control-label">Password</label>
+            <div class="input-group">
+                <input type="password" class="form-control" ng-model="user.password" />
+                <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
+            </div>
+            <br/>
+            <label class="control-label">Register as</label>
+            <div class="input-group">
+                <span class="radio-span" ng-click="user.admin=true"><input type="radio" class="radio-inline role-radio" ng-checked="user.admin">Admin</span>&nbsp;&nbsp;&nbsp;
+                <span class="radio-span" ng-click="user.admin=false"><input type="radio" class="radio-inline role-radio" ng-checked="!user.admin">User</span>
+            </div>
+            <label class="margin-top-15 small text-info" ng-show="!user.admin">Note: User can't chat with each other.</label>
+            <label class="margin-top-15 small text-info" ng-show="user.admin">Note: Admin will have all privileges, can chat with other admins as well as users.</label>
+            <br/>
+            <br/>
+            <div class="row">
+                <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+                    <button type="submit" name="submit" class="form-control btn btn-primary">Register</button>
+                </div>
+                <div class="col-xs-12 hidden-sm hidden-md hidden-lg">
+                    <br/>
+                </div>
+                <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+                    <button type="button" name="submit" class="form-control btn btn-default" ng-click="clear()">Clear</button>  
+                </div>
+            </div>
+            <br/>
+            <div class="form-group">
+                <label class="">Already have an account? &nbsp;<a href="#/">Login here</a></label>
+            </div>
+        </div>
+    </form>
+</div>

@@ -1,0 +1,30 @@
+<div class="main" ng-init="init()">
+    <div class="chats">
+        <div class="btn-group" ng-show="profile.admin"><button type="button" class="btn" ng-class="{'btn-primary':sort==undefined,'btn-default':sort!==undefined}" ng-click="sort=undefined">All</button><button type="button" class="btn" ng-class="{'btn-primary':sort===true,'btn-default':sort!==true}" ng-click="sort=true">Administrators</button><button type="button" class="btn" ng-class="{'btn-primary':sort===false,'btn-default':sort!==false}" ng-click="sort=false">Users</button></div>
+        <ul class="list-group chat-list margin-top-15">
+            <li class="list-group-item chat-item" ng-repeat="sender in senders | filter:{admin:sort} | orderBy:'name'">
+                <div class="chat-header" ng-click="chatBox(sender)"><label>{{sender.name}}</label><div class="status" ng-class="{'online':users[sender.uid].online,'offline':!users[sender.uid].online}"></div><span class="pull-right badge" ng-show="sender.unread">{{sender.unread}}</span></div>
+                <div class="chat-body collapse" ng-class="{'in':sender.inbox}">
+                    <div class="chat-messages margin-top-15 margin-bottom-20">
+                        <ul class="list-group">
+                            <li class="list-group-item" ng-class="{'user':chat.sid === user.uid,'sender':chat.sid !== user.uid}" ng-repeat="chat in sender.chats">{{chat.msg}}</li>
+                        </ul>
+                    </div>
+                    <div class="chat-input">
+                        <form class="form" name="ChatForm">
+                            <div class="form-group">
+                                <input type="text" name="InputMessage" ng-model="sender.reply" ng-keypress="sendWithEnter($event,sender,user.uid)" autofocus="sender.inbox" class="form-control" />
+                            </div>
+                            <div class="form-group">
+                                <div class="text-right">
+                                    <button type="button" ng-click="clear(sender)" class="btn btn-default margin-right-10">Clear</button>
+                                    <button type="button" ng-click="send(sender,user.uid)" class="btn btn-success">Reply</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </li>
+        </ul>
+    </div>
+</div>
